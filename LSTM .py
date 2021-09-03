@@ -235,41 +235,7 @@ plt.legend(['True', 'Val', 'Predictions'], loc = 'lower right')
 plt.show()
 
 
-# In[114]:
 
-
-# Avoir les cotations
-apple_quote = web.DataReader('ETH-USD', data_source='yahoo', start='2019-01-01', end='2021-7-31')
-#Creation d'une nouvelle data frame
-new_df = apple_quote.filter(['Adj Close'])
-# Prendre les dernier 60j Adj Close et convertir la nouvelle data frame en tableau
-last_60_days = new_df[-60:].values
-#Normaliser la data
-last_60_days_scaled = scaler.transform(last_60_days)
-#Creation d'une liste vide
-X_test = []
-#Ajouter les derniers 60 j 
-X_test.append(last_60_days_scaled)
-#Convertir X_test data set en un numpy tableau
-X_test = np.array(X_test)
-#Redimensionner la data
-X_test = np.reshape(X_test, (X_test.shape[0],X_test.shape[1],1))
-# Prendre le prix normalisé
-pred_price = model.predict(X_test)
-#Dénormaliser le prix
-pred_price = scaler.inverse_transform(pred_price)
-print(pred_price)
-
-
-# In[115]:
-
-
-# La cotation du J+1
-ETH_quote2 = web.DataReader('ETH-USD', data_source='yahoo', start='2021-8-2', end='2021-8-2')
-ETH_quote2
-
-
-# In[ ]:
 
 
 
